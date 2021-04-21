@@ -58,9 +58,9 @@ class CardPage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           FadeInImage(
-            placeholder: NetworkImage(
+            placeholder: AssetImage('assets/jar-loading.gif'),
+            image: NetworkImage(
                 'https://thelandscapephotoguy.com/wp-content/uploads/2019/01/landscape%20new%20zealand%20S-shape.jpg'),
-            image: AssetImage('assets/jar-loading.gif'),
             fadeInDuration: Duration(milliseconds: 200),
             height: 250.0,
             fit: BoxFit.cover,
