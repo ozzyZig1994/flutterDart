@@ -1,0 +1,20 @@
+{
+    "nombreApp" : "Knowledge Center",
+    "rutas" : [
+        {
+            "ruta" : "busqueda_aplicaciones",
+            "icon" : "search",
+            "texto": "Aplicaciones"
+        },
+        {
+            "ruta" : "galeria",
+            "icon" : "photo_library_outlined",
+            "texto": "Galeria"
+        },
+        {
+            "ruta" : "academia",
+            "icon" : "school_outlined",
+            "texto": "Academia"
+        }
+    ]
+}
