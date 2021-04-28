@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:kc_app/src/bloc/provider.dart';
+import 'package:kc_app/src/providers/provider.dart';
 import 'package:kc_app/src/pages/home_page.dart';
 import 'package:kc_app/src/pages/login_page.dart';
 

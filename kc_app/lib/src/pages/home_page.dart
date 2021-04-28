@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:kc_app/src/bloc/provider.dart';
+import 'package:kc_app/src/providers/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
