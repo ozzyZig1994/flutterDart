@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:kc_app/src/providers/provider.dart';
 import 'package:kc_app/src/providers/usuario_provider.dart';
+import 'package:kc_app/src/utils/utils.dart';
 
 class LoginPage extends StatelessWidget {
   final usuarioProvider = new UsuarioProvider();
@@ -116,13 +117,13 @@ class LoginPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: TextField(
               textCapitalization: TextCapitalization.characters,
-              keyboardType: TextInputType.emailAddress,
+              keyboardType: TextInputType.name,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20.0)),
                   suffixIcon: Icon(Icons.perm_identity_outlined),
                   labelText: 'Usuario',
-                  counterText: snapshot.data,
+                  //counterText: snapshot.data,
                   errorText: snapshot.error,
                   hintText: 'Usuario'),
               onChanged: bloc.changeEmail,
@@ -145,7 +146,7 @@ class LoginPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20.0)),
                   suffixIcon: Icon(Icons.lock_outline),
                   labelText: 'Contraseña',
-                  counterText: snapshot.data,
+                  //ounterText: snapshot.data,
                   errorText: snapshot.error,
                   hintText: 'Contraseña'),
               onChanged: bloc.changePassword,
@@ -170,14 +171,12 @@ class LoginPage extends StatelessWidget {
         });
   }
 
-  _login(LoginBloc bloc, BuildContext context) {
-    print('=============');
-    print('Email: ${bloc.email}');
-    print('Password: ${bloc.password}');
-    print('=============');
+  _login(LoginBloc bloc, BuildContext context) async {
+    Map info = await usuarioProvider.login(bloc.email, bloc.password);
 
-    usuarioProvider.login(bloc.email, bloc.password);
-
-    Navigator.pushReplacementNamed(context, 'home');
+    if (info['ok'])
+      Navigator.pushReplacementNamed(context, 'home');
+    else
+      mostrarAlerta(context, info['message']);
   }
 }

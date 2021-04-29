@@ -19,9 +19,9 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text('Email: ${bloc.email}'),
+          Text('Usuario: ${bloc.email}'),
           Divider(),
-          Text('Password: ${bloc.password}')
+          Text('Bienvenido')
         ],
       ),
     );
