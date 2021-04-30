@@ -160,7 +160,8 @@ class LoginPage extends StatelessWidget {
         stream: bloc.formValidStream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return ElevatedButton(
-            onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
+            onPressed:
+                snapshot.hasData ? () => _onPressed(bloc, context) : null,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
               child: Text('Ingresar'),
@@ -171,12 +172,20 @@ class LoginPage extends StatelessWidget {
         });
   }
 
-  _login(LoginBloc bloc, BuildContext context) async {
+  Future<bool> _onPressed(LoginBloc bloc, BuildContext context) async {
+    mostrarLoader(context);
     Map info = await usuarioProvider.login(bloc.email, bloc.password);
 
-    if (info['ok'])
+    if (info['ok']) {
+      ocultarLoader(context);
       Navigator.pushReplacementNamed(context, 'home');
-    else
+      return true;
+    } else {
+      ocultarLoader(context);
       mostrarAlerta(context, info['message']);
+      return false;
+    }
   }
+
+  //_login(LoginBloc bloc, BuildContext context) async {}
 }
