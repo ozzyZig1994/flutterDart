@@ -6,22 +6,25 @@ import 'package:kc_app/src/pages/home_page.dart';
 import 'package:kc_app/src/pages/login_page.dart';
 
 void main() async {
-  runApp(MyApp());
   final prefs = new PreferenciasUsuario();
+  WidgetsFlutterBinding.ensureInitialized();
   await prefs.initPrefs();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final prefs = new PreferenciasUsuario();
+  
   @override
   Widget build(BuildContext context) {
     return Provider(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Material App',
-        initialRoute: 'login',
+        title: 'Knowledge Center',
+        initialRoute: prefs.ultimaPagina,
         routes: {
-          'login': (BuildContext context) => LoginPage(),
-          'home': (BuildContext context) => HomePage()
+          LoginPage.routeName: (BuildContext context) => LoginPage(),
+          HomePage.routeName: (BuildContext context) => HomePage()
         },
         theme: ThemeData(primaryColor: Colors.deepPurple),
       ),

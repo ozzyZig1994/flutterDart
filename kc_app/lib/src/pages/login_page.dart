@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:kc_app/src/providers/provider.dart';
 import 'package:kc_app/src/providers/usuario_provider.dart';
 import 'package:kc_app/src/utils/utils.dart';
+import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
+import 'package:kc_app/src/pages/home_page.dart';
 
 class LoginPage extends StatelessWidget {
+  static final String routeName = 'login';
   final usuarioProvider = new UsuarioProvider();
+  final prefs = new PreferenciasUsuario();
 
   @override
   Widget build(BuildContext context) {
+    prefs.ultimaPagina = LoginPage.routeName;
     return Scaffold(
       body: Stack(
         children: <Widget>[_crearFondo(context), _loginForm(context)],
@@ -172,18 +177,16 @@ class LoginPage extends StatelessWidget {
         });
   }
 
-  Future<bool> _onPressed(LoginBloc bloc, BuildContext context) async {
+  Future _onPressed(LoginBloc bloc, BuildContext context) async {
     mostrarLoader(context);
     Map info = await usuarioProvider.login(bloc.email, bloc.password);
 
-    if (info['ok']) {
-      ocultarLoader(context);
-      Navigator.pushReplacementNamed(context, 'home');
-      return true;
-    } else {
+    if (!info['ok']) {
       ocultarLoader(context);
       mostrarAlerta(context, info['message']);
-      return false;
+    } else {
+      ocultarLoader(context);
+      Navigator.pushReplacementNamed(context, HomePage.routeName);
     }
   }
 }

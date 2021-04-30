@@ -24,13 +24,17 @@ class UsuarioProvider {
         body: authData);
     Map<String, dynamic> decodeUsuarioResp = json.decode(usuarioResponse.body);
 
+    print(decodeUsuarioResp['usuario']);
+
     if (decodeUsuarioResp.containsKey('token')) {
       _prefs.token = decodeUsuarioResp['token'];
-      return {
-        'ok': decodeUsuarioResp['status'],
-        'usuario': decodeUsuarioResp['usuario']
-      };
+      _prefs.idUsuario = decodeUsuarioResp['usuario']['id'];
+      _prefs.nombreUsuario = decodeUsuarioResp['usuario']['nombre'];
+      _prefs.usuario = decodeUsuarioResp['usuario']['usuario'];
+      _prefs.emailUsuario = decodeUsuarioResp['usuario']['email'];
+      _prefs.rolUsuario = decodeUsuarioResp['usuario']['rol'];
+      return {'ok': decodeUsuarioResp['status']};
     } else
-      return {'ok': false, 'message': decodeUsuarioResp['message']};
+      return {'ok': decodeUsuarioResp['status'], 'message': decodeUsuarioResp['message']};
   }
 }
