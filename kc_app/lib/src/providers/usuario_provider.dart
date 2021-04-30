@@ -24,8 +24,6 @@ class UsuarioProvider {
         body: authData);
     Map<String, dynamic> decodeUsuarioResp = json.decode(usuarioResponse.body);
 
-    print(decodeUsuarioResp);
-
     if (decodeUsuarioResp.containsKey('token')) {
       _prefs.token = decodeUsuarioResp['token'];
       return {

@@ -186,6 +186,4 @@ class LoginPage extends StatelessWidget {
       return false;
     }
   }
-
-  //_login(LoginBloc bloc, BuildContext context) async {}
 }
