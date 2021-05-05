@@ -27,6 +27,7 @@ class UsuarioProvider {
     print(decodeUsuarioResp['usuario']);
 
     if (decodeUsuarioResp.containsKey('token')) {
+      _prefs.ip = decodeIpResp['ip'];
       _prefs.token = decodeUsuarioResp['token'];
       _prefs.idUsuario = decodeUsuarioResp['usuario']['id'];
       _prefs.nombreUsuario = decodeUsuarioResp['usuario']['nombre'];
@@ -36,5 +37,20 @@ class UsuarioProvider {
       return {'ok': decodeUsuarioResp['status']};
     } else
       return {'ok': decodeUsuarioResp['status'], 'message': decodeUsuarioResp['message']};
+  }
+
+  Future<Map<String, dynamic>> logout(String email, String ip) async {
+    final sessionData = {'usuario': email, 'ip': ip};
+
+    final logoutResponse = await http.post(
+        Uri.parse(
+            'https://www.bactiva.com/knowledgecenter/kc/public/usuarios/logout'),
+        body: sessionData);
+    Map<String, dynamic> decodeLogoutResponse =
+        json.decode(logoutResponse.body);
+
+    print(decodeLogoutResponse);
+    
+    return {};
   }
 }

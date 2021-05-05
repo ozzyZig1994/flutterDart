@@ -16,6 +16,15 @@ class PreferenciasUsuario {
     this._prefs = await SharedPreferences.getInstance();
   }
 
+  // GET y SET del ip del usuario
+  get ip {
+    return _prefs.getString('ip') ?? '';
+  }
+
+  set ip( String value ) {
+    _prefs.setString('ip', value);
+  }
+
   // GET y SET del token de sesion
   get token {
     return _prefs.getString('token') ?? '';
