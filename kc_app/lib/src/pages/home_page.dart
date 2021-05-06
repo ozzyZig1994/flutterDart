@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
-import 'package:kc_app/src/providers/usuario_provider.dart';
-import 'package:kc_app/src/pages/login_page.dart';
+import 'package:kc_app/src/pages/aplicaciones_page.dart';
+import 'package:kc_app/src/pages/galeria_page.dart';
+import 'package:kc_app/src/services/cultivos_service.dart';
 
 class HomePage extends StatelessWidget {
   static final String routeName = 'home';
   final prefs = new PreferenciasUsuario();
-  final usuarioProvider = new UsuarioProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -16,57 +16,31 @@ class HomePage extends StatelessWidget {
     // dentro del árbol de Widgets
     prefs.ultimaPagina = HomePage.routeName;
 
-    return ChangeNotifierProvider(
-      create: (_) => new _NavegacionModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => new _NavegacionModel()),
+        ChangeNotifierProvider(create: (_) => new CultivosService()),
+      ],
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Knowledge Center'),
-        ),
-        drawer: _crearMenu(context),
         body: _Paginas(),
         bottomNavigationBar: _Navegacion(),
       ),
     );
-  }
-
-  Drawer _crearMenu(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Container(),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('menu-img.jpg'), fit: BoxFit.cover)),
-          ),
-          ListTile(
-            leading: Icon(Icons.logout, color: Colors.deepPurple),
-            title: Text('Cerrar sesión'),
-            onTap: () => _onTap(context),
-          )
-        ],
-      ),
-    );
-  }
-
-  _onTap(BuildContext context) {
-    usuarioProvider.logout(prefs.usuario, prefs.ip);
-    return Navigator.pushReplacementNamed(context, LoginPage.routeName);
   }
 }
 
 class _Paginas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final navegacionModel = Provider.of<_NavegacionModel>(context);
     return PageView(
+      controller: navegacionModel.pageController,
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
+        AplicacionesPage(),
+        GaleriaPage(),
         Container(
-          color: Colors.deepOrangeAccent,
-        ),
-        Container(
-          color: Colors.deepPurpleAccent,
+          color: Colors.deepPurple,
         )
       ],
     );
@@ -76,9 +50,10 @@ class _Paginas extends StatelessWidget {
 class _Navegacion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final navegacionModel = Provider.of<_NavegacionModel>(context);
     return BottomNavigationBar(
-        currentIndex: 0,
-        onTap: (i) => print('$i'),
+        currentIndex: navegacionModel.paginaActual,
+        onTap: (i) => navegacionModel.paginaActual = i,
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.search), label: 'Aplicaciones'),
@@ -89,13 +64,18 @@ class _Navegacion extends StatelessWidget {
   }
 }
 
-class _NavegacionModel with ChangeNotifier{
+class _NavegacionModel with ChangeNotifier {
   int _paginaActual = 0;
+  PageController _pageController = new PageController();
 
   int get paginaActual => this._paginaActual;
 
   set paginaActual(int valor) {
     this._paginaActual = valor;
-    notifyListeners ();
+    _pageController.animateToPage(valor,
+        duration: Duration(milliseconds: 250), curve: Curves.easeInOut);
+    notifyListeners();
   }
+
+  PageController get pageController => this._pageController;
 }
