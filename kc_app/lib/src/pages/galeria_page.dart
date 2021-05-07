@@ -8,7 +8,6 @@ class GaleriaPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Galeria'),
-        elevation: 15.0,
         centerTitle: true,
       ),
       drawer: MenuWidget(),

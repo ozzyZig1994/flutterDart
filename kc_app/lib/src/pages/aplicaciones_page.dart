@@ -12,7 +12,6 @@ class AplicacionesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Aplicaciones'),
-        elevation: 15.0,
         centerTitle: true,
       ),
       drawer: MenuWidget(),

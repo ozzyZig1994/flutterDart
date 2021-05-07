@@ -31,6 +31,8 @@ dependencies:
   rxdart: ^0.23.0
   http: ^0.12.0
   provider: ^5.0.0
+  flutter_staggered_animations: "^1.0.0"
+  transparent_image: ^2.0.0
   shared_preferences:
 
 dev_dependencies:
@@ -50,7 +52,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - Hourglass.gif
     - cloud.gif
     - menu-img.jpg
   #   - images/a_dot_ham.jpeg

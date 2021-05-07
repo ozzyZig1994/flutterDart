@@ -23,7 +23,5 @@ class CultivosService with ChangeNotifier {
 
     this.cultivos.addAll(cultivosResponse.cultivos);
     notifyListeners();
-    print('Cargando cultivos...');
-    print(this.cultivos);
   }
 }
