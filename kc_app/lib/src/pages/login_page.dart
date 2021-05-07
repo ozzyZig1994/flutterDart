@@ -181,7 +181,7 @@ class LoginPage extends StatelessWidget {
     mostrarLoader(context);
     Map info = await usuarioProvider.login(bloc.email, bloc.password);
 
-    if (!info['ok']) {
+    if (!info['status']) {
       ocultarLoader(context);
       mostrarAlerta(context, info['message']);
     } else {

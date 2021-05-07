@@ -39,9 +39,7 @@ class _Paginas extends StatelessWidget {
       children: <Widget>[
         AplicacionesPage(),
         GaleriaPage(),
-        Container(
-          color: Colors.deepPurple,
-        )
+        //Container(color: Colors.deepPurple)
       ],
     );
   }
@@ -59,7 +57,7 @@ class _Navegacion extends StatelessWidget {
               icon: Icon(Icons.science), label: 'Aplicaciones'),
           BottomNavigationBarItem(
               icon: Icon(Icons.collections), label: 'Galeria'),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Academia'),
+          //BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Academia'),
         ]);
   }
 }

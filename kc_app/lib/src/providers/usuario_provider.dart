@@ -1,4 +1,3 @@
-//import 'dart:convert' as convert;
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -24,8 +23,6 @@ class UsuarioProvider {
         body: authData);
     Map<String, dynamic> decodeUsuarioResp = json.decode(usuarioResponse.body);
 
-    print(decodeUsuarioResp['usuario']);
-
     if (decodeUsuarioResp.containsKey('token')) {
       _prefs.ip = decodeIpResp['ip'];
       _prefs.token = decodeUsuarioResp['token'];
@@ -34,9 +31,9 @@ class UsuarioProvider {
       _prefs.usuario = decodeUsuarioResp['usuario']['usuario'];
       _prefs.emailUsuario = decodeUsuarioResp['usuario']['email'];
       _prefs.rolUsuario = decodeUsuarioResp['usuario']['rol'];
-      return {'ok': decodeUsuarioResp['status']};
+      return decodeUsuarioResp;
     } else
-      return {'ok': decodeUsuarioResp['status'], 'message': decodeUsuarioResp['message']};
+      return decodeUsuarioResp;
   }
 
   Future<Map<String, dynamic>> logout(String email, String ip) async {
@@ -48,9 +45,7 @@ class UsuarioProvider {
         body: sessionData);
     Map<String, dynamic> decodeLogoutResponse =
         json.decode(logoutResponse.body);
-
-    print(decodeLogoutResponse);
     
-    return {};
+    return decodeLogoutResponse;
   }
 }
