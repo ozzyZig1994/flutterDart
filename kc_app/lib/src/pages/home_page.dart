@@ -56,7 +56,7 @@ class _Navegacion extends StatelessWidget {
         onTap: (i) => navegacionModel.paginaActual = i,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.search), label: 'Aplicaciones'),
+              icon: Icon(Icons.science), label: 'Aplicaciones'),
           BottomNavigationBarItem(
               icon: Icon(Icons.collections), label: 'Galeria'),
           BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Academia'),

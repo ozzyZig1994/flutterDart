@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:kc_app/src/pages/cultivo_page.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import 'package:kc_app/src/models/cultivos_models.dart';
@@ -61,6 +62,7 @@ class _TarjetaCultivo extends StatelessWidget {
                 title: Text(cultivo.nombre, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500), textAlign: TextAlign.center,),
                 dense: true,
                 trailing: Icon(Icons.chevron_right, color: Colors.deepPurple),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => CultivoPage(cultivo.nombre))),
             )
           )
         )

@@ -13,6 +13,9 @@ class AplicacionesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Aplicaciones'),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.search), onPressed: () {})
+        ],
       ),
       drawer: MenuWidget(),
       body: (cultivos.length == 0)
