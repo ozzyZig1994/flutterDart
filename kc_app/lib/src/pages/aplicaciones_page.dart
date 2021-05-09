@@ -5,8 +5,14 @@ import 'package:kc_app/src/widgets/menu_widget.dart';
 import 'package:kc_app/src/services/cultivos_service.dart';
 import 'package:kc_app/src/widgets/lista_cultivos_widget.dart';
 
-class AplicacionesPage extends StatelessWidget {
+class AplicacionesPage extends StatefulWidget {
   @override
+  _AplicacionesPageState createState() => _AplicacionesPageState();
+}
+
+class _AplicacionesPageState extends State<AplicacionesPage> with AutomaticKeepAliveClientMixin {
+  @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     final cultivos = Provider.of<CultivosService>(context).cultivos;
     return Scaffold(
@@ -25,4 +31,7 @@ class AplicacionesPage extends StatelessWidget {
           : ListaCultivos(cultivos),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
