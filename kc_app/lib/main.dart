@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kc_app/src/pages/cultivo_page.dart';
 
 import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:kc_app/src/providers/provider.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         initialRoute: prefs.ultimaPagina,
         routes: {
           LoginPage.routeName: (BuildContext context) => LoginPage(),
-          HomePage.routeName: (BuildContext context) => HomePage()
+          HomePage.routeName: (BuildContext context) => HomePage(),
+          CultivoPage.routeName : (BuildContext context) => CultivoPage()
         },
         theme: ThemeData(primaryColor: Colors.deepPurple),
       ),
