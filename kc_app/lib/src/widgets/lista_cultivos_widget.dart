@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
 import 'package:transparent_image/transparent_image.dart';
 
 import 'package:kc_app/src/models/cultivos_models.dart';
