@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 
 import 'package:kc_app/src/providers/cultivo_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -9,6 +10,7 @@ class CultivoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String cultivo = ModalRoute.of(context).settings.arguments;
+    
     CultivoProvider info = new CultivoProvider();
     return Scaffold(
       body: FutureBuilder(
@@ -20,7 +22,11 @@ class CultivoPage extends StatelessWidget {
                   title: Text(cultivo),
                   centerTitle: true,
                 ),
-                body: _contenido(snapshot),
+                body: PDF(autoSpacing: true, enableSwipe: true, swipeHorizontal: true).cachedFromUrl(
+                  snapshot.data.informe,
+                  placeholder: (progress) => Center(child: Text('$progress %')),
+                  errorWidget: (error) => Center(child: Text(error.toString())),
+                ),
               );
             } else {
               return Scaffold(
