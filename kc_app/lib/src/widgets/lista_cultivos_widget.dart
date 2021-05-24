@@ -29,7 +29,14 @@ class _Cultivo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: <Widget>[_TarjetaCultivo(cultivo, index)],
+        children: <Widget>[
+          _TarjetaCultivo(cultivo, index),
+          Divider(
+            height: 20.0,
+            thickness: 0.5,
+            color: Colors.deepPurple,
+          )
+        ],
       ),
     );
   }
@@ -49,29 +56,23 @@ class _TarjetaCultivo extends StatelessWidget {
         child: SlideAnimation(
             verticalOffset: 50.0,
             child: ScaleAnimation(
-                child: Card(
-                    elevation: 10.0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
-                    child: ListTile(
-                      leading: FadeInImage.memoryNetwork(
-                          placeholder: kTransparentImage, image: cultivo.icono),
-                      title: Text(
-                        cultivo.nombre,
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
-                        textAlign: TextAlign.center,
-                      ),
-                      dense: true,
-                      trailing:
-                          Icon(Icons.chevron_right, color: Colors.deepPurple),
-                      onTap: () => Navigator.pushNamed(context, 'cultivo',
-                          arguments: <String, String>{
-                            'nombre' : cultivo.nombre,
-                            'etapa' : cultivo.etapa,
-                            'aplicacion' : cultivo.aplicacion,
-                            'informe' : cultivo.informe
-                          }),
-                    )))));
+                child: ListTile(
+              leading: FadeInImage.memoryNetwork(
+                  placeholder: kTransparentImage, image: cultivo.icono),
+              title: Text(
+                cultivo.nombre,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                textAlign: TextAlign.center,
+              ),
+              dense: true,
+              trailing: Icon(Icons.chevron_right, color: Colors.deepPurple),
+              onTap: () => Navigator.pushNamed(context, 'cultivo',
+                  arguments: <String, String>{
+                    'nombre': cultivo.nombre,
+                    'etapa': cultivo.etapa,
+                    'aplicacion': cultivo.aplicacion,
+                    'informe': cultivo.informe
+                  }),
+            ))));
   }
 }
