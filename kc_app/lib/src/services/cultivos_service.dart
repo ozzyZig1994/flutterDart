@@ -19,7 +19,7 @@ class CultivosService with ChangeNotifier {
     final respListCultivos = await http.get(
         Uri.parse('$_urlCultivos/listaCultivos'),
         headers: {'token': _prefs.token});
-    final cultivosResponse = cultivosResponseFromJson(respListCultivos.body);
+    final cultivosResponse = cultivosFromJson(respListCultivos.body);
 
     this.cultivos.addAll(cultivosResponse.cultivos);
     notifyListeners();
