@@ -10,7 +10,7 @@ class PdfViewPage extends StatelessWidget {
     final String pdf = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('PDF view'),
+        title: Text('Informe técnico'),
         centerTitle: true,
       ),
       body: PDF(autoSpacing: true, enableSwipe: true)
