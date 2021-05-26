@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:kc_app/src/providers/cultivos_provider.dart';
+
 class DataSearch extends SearchDelegate {
+  final cultivos = ['Jitomate', 'Algodón', 'Aguacate', 'Ajo', 'Brócoli'];
+  final cultivosRecientes = ['Sandía', 'Melón'];
+
+  final cultivoProvider = new CultivosProvider();
+
   @override
   List<Widget> buildActions(BuildContext context) {
     // Las acciones del AppBar
@@ -8,7 +15,7 @@ class DataSearch extends SearchDelegate {
       IconButton(
           icon: Icon(Icons.clear),
           onPressed: () {
-            print('build actions clic');
+            query = '';
           })
     ];
   }
@@ -17,14 +24,13 @@ class DataSearch extends SearchDelegate {
   Widget buildLeading(BuildContext context) {
     // Icono a la izquierda del AppBar
     return IconButton(
-      icon: AnimatedIcon(
-        icon: AnimatedIcons.menu_arrow,
-        progress: transitionAnimation,
-      ),
-      onPressed: () {
-        print('leading icons clic');
-      }
-    );
+        icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow,
+          progress: transitionAnimation,
+        ),
+        onPressed: () {
+          close(context, null);
+        });
   }
 
   @override
@@ -36,6 +42,40 @@ class DataSearch extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     // Sugerencias que aparecen cuando la persona escribe
-    return Container();
+    if (query.isEmpty) return Container();
+
+    return FutureBuilder(
+        future: cultivoProvider.buscaCultivo(query),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            final cultivo = snapshot.data;
+            return ListView(
+              children: cultivo.map((c) {
+                return ListTile(
+                  leading: Icon(Icons.schedule),
+                  title: c.nombre,
+                );
+              }),
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        });
   }
 }
+/*final listaSugerida = (query.isEmpty)
+        ? cultivosRecientes
+        : cultivos
+            .where((cultivo) =>
+                cultivo.toLowerCase().startsWith(query.toLowerCase()))
+            .toList();
+
+    return ListView.builder(
+        itemCount: listaSugerida.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: Icon(Icons.schedule),
+            title: Text(listaSugerida[index]),
+            onTap: () {},
+          );
+        });*/

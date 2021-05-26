@@ -29,14 +29,7 @@ class _Cultivo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: <Widget>[
-          _TarjetaCultivo(cultivo, index),
-          Divider(
-            height: 20.0,
-            thickness: 0.5,
-            color: Colors.deepPurple,
-          )
-        ],
+        children: <Widget>[_TarjetaCultivo(cultivo, index), Divider()],
       ),
     );
   }
