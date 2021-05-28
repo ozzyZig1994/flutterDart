@@ -47,16 +47,27 @@ class DataSearch extends SearchDelegate {
     return FutureBuilder(
         future: cultivoProvider.buscaCultivo(query),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
+          if ((snapshot.connectionState == ConnectionState.done) &
+              snapshot.hasData) {
             final cultivo = snapshot.data;
-            return ListView(
-              children: cultivo.map((c) {
-                return ListTile(
-                  leading: Icon(Icons.schedule),
-                  title: c.nombre,
-                );
-              }),
-            );
+            return ListView.builder(
+                itemCount: 1,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    leading: Icon(Icons.info_outline),
+                    title: Text(cultivo['cultivo']),
+                    onTap: () {
+                      close(context, null);
+                      Navigator.pushNamed(context, 'cultivo',
+                          arguments: <String, String>{
+                            'nombre': cultivo['cultivo'],
+                            'etapa': cultivo['etapa'],
+                            'aplicacion': cultivo['aplicacion'],
+                            'informe': cultivo['informe']
+                          });
+                    },
+                  );
+                });
           } else {
             return Center(child: CircularProgressIndicator());
           }
