@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:kc_app/src/providers/cultivos_provider.dart';
 
 class DataSearch extends SearchDelegate {
-  final cultivos = ['Jitomate', 'Algodón', 'Aguacate', 'Ajo', 'Brócoli'];
-  final cultivosRecientes = ['Sandía', 'Melón'];
-
   final cultivoProvider = new CultivosProvider();
 
   @override
@@ -74,19 +71,3 @@ class DataSearch extends SearchDelegate {
         });
   }
 }
-/*final listaSugerida = (query.isEmpty)
-        ? cultivosRecientes
-        : cultivos
-            .where((cultivo) =>
-                cultivo.toLowerCase().startsWith(query.toLowerCase()))
-            .toList();
-
-    return ListView.builder(
-        itemCount: listaSugerida.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: Icon(Icons.schedule),
-            title: Text(listaSugerida[index]),
-            onTap: () {},
-          );
-        });*/
