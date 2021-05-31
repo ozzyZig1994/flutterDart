@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
     // Va ir escalando hasta encontrar una instacia del Provider
     // dentro del árbol de Widgets
     prefs.ultimaPagina = HomePage.routeName;
-    cron.schedule(Schedule.parse('* */1 * * *'), () async { usuarioProvider.logout(prefs.emailUsuario, prefs.ip);});
+    cron.schedule(Schedule.parse('* */1 * * *'), () async { usuarioProvider.logout(prefs.usuario, prefs.ip);});
 
     return MultiProvider(
       providers: [
