@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:kc_app/src/widgets/menu_widget.dart';
+import 'package:kc_app/src/widgets/tarjeta_widget.dart';
 
 class GaleriaPage extends StatelessWidget {
   @override
@@ -24,24 +25,41 @@ class GaleriaPage extends StatelessWidget {
 
   TabBarView _tabBarView(BuildContext context) {
     return TabBarView(children: <Widget>[
-      Text('Laboratorio'),
+      _laboratorio(context),
       _aplicaciones(context),
-      Text('Interno')
+      _interno(context)
     ]);
   }
 
   Widget _aplicaciones(BuildContext context) {
     return ListView(children: <Widget>[
-      Card(
-        child: Container(
-          height: 25.0,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('Aplicaciones.jpg'),
-                  fit: BoxFit.fitWidth,
-                  alignment: Alignment.topCenter)),
-        ),
-      )
-    ], scrollDirection: Axis.vertical);
+      Tarjeta('Aplicaciones.jpg', 'Aspersión'),
+      SizedBox(height: 20.0),
+      Tarjeta('Aplicaciones.jpg', 'Campo'),
+      SizedBox(height: 20.0),
+      Tarjeta('Aplicaciones.jpg', 'Charola'),
+      SizedBox(height: 20.0),
+      Tarjeta('Aplicaciones.jpg', 'Sistema de riego'),
+    ], scrollDirection: Axis.vertical, padding: EdgeInsets.all(10.0));
+  }
+
+  Widget _laboratorio(BuildContext context) {
+    return ListView(children: <Widget>[
+      Tarjeta('Laboratorio.jpg', 'Microorganismos'),
+      SizedBox(height: 20.0),
+      Tarjeta('Laboratorio.jpg', 'Instalaciones'),
+      SizedBox(height: 20.0),
+      Tarjeta('Laboratorio.jpg', 'Insectos'),
+      SizedBox(height: 20.0)
+    ], scrollDirection: Axis.vertical, padding: EdgeInsets.all(10.0));
+  }
+
+  Widget _interno(BuildContext context) {
+    return ListView(children: <Widget>[
+      Tarjeta('Interno.jpg', 'Eventos'),
+      SizedBox(height: 20.0),
+      Tarjeta('Interno.jpg', 'Personal'),
+      SizedBox(height: 20.0)
+    ], scrollDirection: Axis.vertical, padding: EdgeInsets.all(10.0));
   }
 }
