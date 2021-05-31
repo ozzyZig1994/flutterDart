@@ -58,6 +58,9 @@ flutter:
     - cloud.gif
     - jar-loading.gif
     - menu-img.jpg
+    - Aplicaciones.jpg
+    - Interno.jpg
+    - Laboratorio.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

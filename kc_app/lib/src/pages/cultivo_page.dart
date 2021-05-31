@@ -23,7 +23,7 @@ class CultivoPage extends StatelessWidget {
   }
 
   TabBarView _tabBarView(BuildContext context, String etapa, String aplicacion) {
-    return TabBarView(children: [
+    return TabBarView(children: <Widget>[
       InteractiveViewer(
           child: FadeInImage(
               placeholder: AssetImage('jar-loading.gif'),
