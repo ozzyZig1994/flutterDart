@@ -8,11 +8,11 @@ class CultivosProvider {
   
   Future<Map<String, dynamic>> buscaCultivo(String query) async {
     final cultivoResponse = await http.get(Uri.parse(
-        'https://www.bactiva.com/knowledgecenter/kc/public/cultivos/infoCultivo/cultivo/$query/idioma/es'),
+        'https://www.bactiva.com/knowledgecenter/kc/public/cultivos/buscaCultivo/cultivo/$query/idioma/es'),
         headers: {'token': _prefs.token});
 
     Map<String, dynamic> decodeUsuarioResp =  json.decode(cultivoResponse.body);
 
-    return decodeUsuarioResp['info'];
+    return decodeUsuarioResp;
   }
 }

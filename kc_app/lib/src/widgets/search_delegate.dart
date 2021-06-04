@@ -48,19 +48,19 @@ class DataSearch extends SearchDelegate {
               snapshot.hasData) {
             final cultivo = snapshot.data;
             return ListView.builder(
-                itemCount: 1,
+                itemCount: cultivo['info'].length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     leading: Icon(Icons.info_outline),
-                    title: Text(cultivo['cultivo']),
+                    title: Text(cultivo['info'][index]['cultivo']),
                     onTap: () {
                       close(context, null);
                       Navigator.pushNamed(context, 'cultivo',
                           arguments: <String, String>{
-                            'nombre': cultivo['cultivo'],
-                            'etapa': cultivo['etapa'],
-                            'aplicacion': cultivo['aplicacion'],
-                            'informe': cultivo['informe']
+                            'nombre': cultivo['info'][index]['cultivo'],
+                            'etapa': cultivo['info'][index]['etapa'],
+                            'aplicacion': cultivo['info'][index]['aplicacion'],
+                            'informe': cultivo['info'][index]['informe']
                           });
                     },
                   );
