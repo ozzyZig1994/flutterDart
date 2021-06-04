@@ -20,7 +20,8 @@ class CultivoPage extends StatelessWidget {
             actions: <Widget>[
               PopupMenuButton(
                   onSelected: (value) {
-                    print(value);
+                    Navigator.pushNamed(context, 'galeria_cultivo',
+                        arguments: cultivo['nombre']);
                   },
                   itemBuilder: (context) => [
                         PopupMenuItem(
