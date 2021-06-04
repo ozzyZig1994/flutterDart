@@ -4,6 +4,8 @@ import 'package:kc_app/src/providers/cultivos_provider.dart';
 
 class DataSearch extends SearchDelegate {
   final cultivoProvider = new CultivosProvider();
+  @override
+  String get searchFieldLabel => 'Buscar cultivo';
 
   @override
   List<Widget> buildActions(BuildContext context) {

@@ -13,16 +13,30 @@ class CultivoPage extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text(cultivo['nombre']),
+            actions: <Widget>[
+              PopupMenuButton(
+                  onSelected: (value) {
+                    print(value);
+                  },
+                  itemBuilder: (context) => [
+                        PopupMenuItem(
+                            value: 'galeria',
+                            child: Text('Ver galería de ${cultivo['nombre']}'))
+                      ])
+            ],
             centerTitle: true,
             bottom:
                 TabBar(tabs: [Tab(text: 'Aplicacion'), Tab(text: 'Etapas')]),
           ),
           body: _tabBarView(context, cultivo['etapa'], cultivo['aplicacion']),
-          floatingActionButton: (cultivo['informe'] !=  null) ? _pdfView(context, cultivo['informe']) : null,
+          floatingActionButton: (cultivo['informe'] != null)
+              ? _pdfView(context, cultivo['informe'])
+              : null,
         ));
   }
 
-  TabBarView _tabBarView(BuildContext context, String etapa, String aplicacion) {
+  TabBarView _tabBarView(
+      BuildContext context, String etapa, String aplicacion) {
     return TabBarView(children: <Widget>[
       InteractiveViewer(
           child: FadeInImage(
@@ -37,8 +51,9 @@ class CultivoPage extends StatelessWidget {
 
   FloatingActionButton _pdfView(BuildContext context, String informe) {
     return FloatingActionButton(
-            onPressed: () => Navigator.pushNamed(context, 'pdf_view', arguments: informe),
-            child: Icon(Icons.picture_as_pdf),
-          );
+      onPressed: () =>
+          Navigator.pushNamed(context, 'pdf_view', arguments: informe),
+      child: Icon(Icons.picture_as_pdf),
+    );
   }
 }
