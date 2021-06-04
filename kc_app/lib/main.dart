@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
           HomePage.routeName: (BuildContext context) => HomePage(),
           CultivoPage.routeName : (BuildContext context) => CultivoPage(),
           PdfViewPage.routeName : (BuildContext context) => PdfViewPage(),
-          GaleriaPage.routeName : (BuildContext context) => GaleriaPage()
         },
         theme: ThemeData(primaryColor: Colors.deepPurple),
       ),
