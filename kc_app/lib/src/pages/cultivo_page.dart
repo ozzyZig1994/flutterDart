@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
+
 class CultivoPage extends StatelessWidget {
   static final String routeName = 'cultivo';
+  final prefs = new PreferenciasUsuario();
 
   @override
   Widget build(BuildContext context) {
+    prefs.ultimaPagina = CultivoPage.routeName;
     final Map<String, String> cultivo =
         ModalRoute.of(context).settings.arguments;
 

@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:kc_app/src/widgets/menu_widget.dart';
 import 'package:kc_app/src/widgets/tarjeta_widget.dart';
+import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
 
 class GaleriaPage extends StatelessWidget {
+  static final String routeName = 'galeria';
+  final prefs = new PreferenciasUsuario();
+
   @override
   Widget build(BuildContext context) {
+    prefs.ultimaPagina = GaleriaPage.routeName;
     return DefaultTabController(
         length: 3,
         child: Scaffold(

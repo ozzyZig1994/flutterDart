@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kc_app/src/pages/cultivo_page.dart';
+import 'package:kc_app/src/pages/galeria_page.dart';
 import 'package:kc_app/src/pages/pdf_view_page.dart';
 
 import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
           LoginPage.routeName: (BuildContext context) => LoginPage(),
           HomePage.routeName: (BuildContext context) => HomePage(),
           CultivoPage.routeName : (BuildContext context) => CultivoPage(),
-          PdfViewPage.routeName : (BuildContext context) => PdfViewPage()
+          PdfViewPage.routeName : (BuildContext context) => PdfViewPage(),
+          GaleriaPage.routeName : (BuildContext context) => GaleriaPage()
         },
         theme: ThemeData(primaryColor: Colors.deepPurple),
       ),
