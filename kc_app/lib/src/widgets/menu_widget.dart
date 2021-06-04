@@ -14,7 +14,21 @@ class MenuWidget extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Container(),
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  CircleAvatar(
+                    child: Text(prefs.usuario),
+                    radius: 35.0,
+                  ),
+                  SizedBox(height: 15.0),
+                  Text(prefs.nombreUsuario,
+                      style: TextStyle(color: Colors.white)),
+                  Text(prefs.emailUsuario,
+                      style: TextStyle(color: Colors.white))
+                ],
+              ),
+            ),
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('menu-img.jpg'), fit: BoxFit.cover)),
