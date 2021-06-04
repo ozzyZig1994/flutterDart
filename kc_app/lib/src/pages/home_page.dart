@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:cron/cron.dart';
 
 import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:kc_app/src/pages/aplicaciones_page.dart';
@@ -8,12 +7,9 @@ import 'package:kc_app/src/pages/galeria_page.dart';
 import 'package:kc_app/src/services/cultivos_service.dart';
 import 'package:kc_app/src/providers/usuario_provider.dart';
 
-import 'login_page.dart';
-
 class HomePage extends StatelessWidget {
   static final String routeName = 'home';
   final prefs = new PreferenciasUsuario();
-  final cron = new Cron();
   final usuarioProvider = new UsuarioProvider();
 
   @override
@@ -21,10 +17,6 @@ class HomePage extends StatelessWidget {
     // Va ir escalando hasta encontrar una instacia del Provider
     // dentro del árbol de Widgets
     prefs.ultimaPagina = HomePage.routeName;
-    cron.schedule(Schedule.parse('0 * * * *'), () async {
-      usuarioProvider.logout(prefs.usuario, prefs.ip);
-      Navigator.pushReplacementNamed(context, LoginPage.routeName);
-    });
 
     return MultiProvider(
       providers: [
