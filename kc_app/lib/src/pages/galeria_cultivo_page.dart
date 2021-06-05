@@ -7,8 +7,7 @@ class GaleriaCultivoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cultivo = ModalRoute.of(context).settings.arguments;
-    print(cultivo);
+    final String cultivo = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Galeria de $cultivo'),
