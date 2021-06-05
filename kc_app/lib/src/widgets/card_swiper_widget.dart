@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class CardSwiper extends StatelessWidget {
-  //final List<dynamic> fotos;
+  final String cultivo;
 
-  //CardSwiper({@required this.fotos});
+  CardSwiper({@required this.cultivo});
 
   @override
   Widget build(BuildContext context) {

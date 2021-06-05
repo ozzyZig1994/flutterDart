@@ -14,12 +14,12 @@ class GaleriaCultivoPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: _swiperTarjetas(),
+        child: _swiperTarjetas(cultivo),
       ),
     );
   }
 
-  Widget _swiperTarjetas() {
-    return CardSwiper();
+  Widget _swiperTarjetas(String cultivo) {
+    return CardSwiper(cultivo: cultivo);
   }
 }
