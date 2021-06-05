@@ -11,8 +11,8 @@ class CultivosProvider {
         'https://www.bactiva.com/knowledgecenter/kc/public/cultivos/buscaCultivo/cultivo/$query/idioma/es'),
         headers: {'token': _prefs.token});
 
-    Map<String, dynamic> decodeUsuarioResp =  json.decode(cultivoResponse.body);
+    Map<String, dynamic> decodeCultivoResp =  json.decode(cultivoResponse.body);
 
-    return decodeUsuarioResp;
+    return decodeCultivoResp;
   }
 }
