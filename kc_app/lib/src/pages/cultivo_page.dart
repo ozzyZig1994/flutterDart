@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
+import 'package:kc_app/src/widgets/lista_cultivos_widget.dart';
 
 class CultivoPage extends StatelessWidget {
   static final String routeName = 'cultivo';
@@ -9,33 +10,32 @@ class CultivoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     prefs.ultimaPagina = CultivoPage.routeName;
-    final Map<String, String> cultivo =
-        ModalRoute.of(context).settings.arguments;
+    final args = ModalRoute.of(context).settings.arguments as CultivoArguments;
 
     return DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(cultivo['nombre']),
+            title: Text(args.nombre),
             actions: <Widget>[
               PopupMenuButton(
                   onSelected: (value) {
                     Navigator.pushNamed(context, 'galeria_cultivo',
-                        arguments: cultivo['nombre']);
+                        arguments: args.nombre);
                   },
                   itemBuilder: (context) => [
                         PopupMenuItem(
                             value: 'galeria',
-                            child: Text('Ver galería de ${cultivo['nombre']}'))
+                            child: Text('Ver galería de ${args.nombre}'))
                       ])
             ],
             centerTitle: true,
             bottom:
                 TabBar(tabs: [Tab(text: 'Aplicacion'), Tab(text: 'Etapas')]),
           ),
-          body: _tabBarView(context, cultivo['etapa'], cultivo['aplicacion']),
-          floatingActionButton: (cultivo['informe'] != null)
-              ? _pdfView(context, cultivo['informe'])
+          body: _tabBarView(context, args.etapa, args.aplicacion),
+          floatingActionButton: (args.informe != null)
+              ? _pdfView(context, args.informe)
               : null,
         ));
   }
