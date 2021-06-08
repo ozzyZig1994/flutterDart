@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cron/cron.dart';
 
 import 'package:kc_app/src/providers/provider.dart';
 import 'package:kc_app/src/providers/usuario_provider.dart';
@@ -11,7 +10,6 @@ class LoginPage extends StatelessWidget {
   static final String routeName = 'login';
   final usuarioProvider = new UsuarioProvider();
   final prefs = new PreferenciasUsuario();
-  final cron = new Cron();
 
   @override
   Widget build(BuildContext context) {
@@ -189,10 +187,6 @@ class LoginPage extends StatelessWidget {
     } else {
       ocultarLoader(context);
       Navigator.pushReplacementNamed(context, HomePage.routeName);
-      cron.schedule(Schedule.parse('* */1 * * *'), () async {
-        usuarioProvider.logout(prefs.usuario, prefs.ip);
-        Navigator.pushReplacementNamed(context, LoginPage.routeName);
-      });
     }
   }
 }

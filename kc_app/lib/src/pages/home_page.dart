@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,6 +7,7 @@ import 'package:kc_app/src/pages/aplicaciones_page.dart';
 import 'package:kc_app/src/pages/galeria_page.dart';
 import 'package:kc_app/src/services/cultivos_service.dart';
 import 'package:kc_app/src/providers/usuario_provider.dart';
+import 'login_page.dart';
 
 class HomePage extends StatelessWidget {
   static final String routeName = 'home';
@@ -17,6 +19,13 @@ class HomePage extends StatelessWidget {
     // Va ir escalando hasta encontrar una instacia del Provider
     // dentro del árbol de Widgets
     prefs.ultimaPagina = HomePage.routeName;
+    const oneHourSession = const Duration(hours: 1);
+    new Timer(
+        oneHourSession,
+        () => {
+              usuarioProvider.logout(prefs.usuario, prefs.ip),
+              Navigator.pushReplacementNamed(context, LoginPage.routeName)
+            });
 
     return MultiProvider(
       providers: [
