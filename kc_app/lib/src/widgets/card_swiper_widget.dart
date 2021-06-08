@@ -18,6 +18,7 @@ class CardSwiper extends StatelessWidget {
         if ((snapshot.connectionState == ConnectionState.done) &
             snapshot.hasData) {
           final galeria = snapshot.data;
+          final numFotos = galeria['galeria'].length;
           return Container(
             child: Swiper(
                 itemBuilder: (BuildContext context, int index) {
@@ -28,7 +29,7 @@ class CardSwiper extends StatelessWidget {
                         fit: BoxFit.fill,
                       ));
                 },
-                itemCount: galeria['galeria'].length,
+                itemCount: numFotos,
                 layout: SwiperLayout.STACK,
                 itemWidth: _screenSize.width * 0.9,
                 itemHeight: _screenSize.height * 0.6),
