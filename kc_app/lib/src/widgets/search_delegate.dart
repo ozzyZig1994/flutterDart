@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:kc_app/src/providers/cultivos_provider.dart';
+import 'package:kc_app/src/widgets/lista_cultivos_widget.dart';
 
 class DataSearch extends SearchDelegate {
   final cultivoProvider = new CultivosProvider();
@@ -59,13 +60,11 @@ class DataSearch extends SearchDelegate {
                       onTap: () {
                         close(context, null);
                         Navigator.pushNamed(context, 'cultivo',
-                            arguments: <String, String>{
-                              'nombre': cultivo['info'][index]['cultivo'],
-                              'etapa': cultivo['info'][index]['etapa'],
-                              'aplicacion': cultivo['info'][index]
-                                  ['aplicacion'],
-                              'informe': cultivo['info'][index]['informe']
-                            });
+                            arguments: CultivoArguments(
+                                cultivo['info'][index]['cultivo'],
+                                cultivo['info'][index]['etapa'],
+                                cultivo['info'][index]['aplicacion'],
+                                cultivo['info'][index]['informe']));
                       },
                     );
                   });
@@ -79,7 +78,3 @@ class DataSearch extends SearchDelegate {
         });
   }
 }
-
-/**
- * 
- */
