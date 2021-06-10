@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:kc_app/src/widgets/lista_cultivos_widget.dart';
 
 class CultivoPage extends StatelessWidget {
@@ -32,7 +31,7 @@ class CultivoPage extends StatelessWidget {
                 TabBar(tabs: [Tab(text: 'Aplicacion'), Tab(text: 'Etapas')]),
           ),
           body: _tabBarView(context, args.etapa, args.aplicacion),
-          floatingActionButton: (args.informe != null)
+          floatingActionButton: (args.informe != '')
               ? _pdfView(context, args.informe)
               : null,
         ));
