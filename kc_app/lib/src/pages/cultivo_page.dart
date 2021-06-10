@@ -5,11 +5,9 @@ import 'package:kc_app/src/widgets/lista_cultivos_widget.dart';
 
 class CultivoPage extends StatelessWidget {
   static final String routeName = 'cultivo';
-  final prefs = new PreferenciasUsuario();
 
   @override
   Widget build(BuildContext context) {
-    prefs.ultimaPagina = CultivoPage.routeName;
     final args = ModalRoute.of(context).settings.arguments as CultivoArguments;
 
     return DefaultTabController(
