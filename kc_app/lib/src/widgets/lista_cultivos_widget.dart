@@ -48,24 +48,28 @@ class _TarjetaCultivo extends StatelessWidget {
         duration: const Duration(milliseconds: 375),
         child: SlideAnimation(
             verticalOffset: 50.0,
-            child: ScaleAnimation(
-              child: ListTile(
-                leading: FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage, image: cultivo.icono),
-                title: Text(
-                  cultivo.nombre,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                  textAlign: TextAlign.center,
-                ),
-              dense: true,
-              trailing: Icon(Icons.chevron_right, color: Colors.deepPurple),
-              onTap: () => Navigator.pushNamed(context, 'cultivo', 
-                arguments: CultivoArguments(cultivo.nombre, cultivo.etapa, cultivo.aplicacion, cultivo.informe)
-            )
-          )
-        )
-      )
-    );
+            child: ScaleAnimation(child: _cultivoItem(context))));
+  }
+
+  Widget _cultivoItem(BuildContext context) {
+    return ListTile(
+        leading: FadeInImage.memoryNetwork(
+            placeholder: kTransparentImage, image: cultivo.icono),
+        title: Text(
+          cultivo.nombre,
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          textAlign: TextAlign.center,
+        ),
+        dense: true,
+        trailing: Icon(Icons.chevron_right, color: Colors.deepPurple),
+        onTap: () => _onTap(context, cultivo.nombre, cultivo.etapa,
+            cultivo.aplicacion, cultivo.informe));
+  }
+
+  void _onTap(BuildContext context, String nombre, String etapa,
+      String aplicacion, String informe) {
+    Navigator.pushNamed(context, 'cultivo',
+        arguments: CultivoArguments(nombre, etapa, aplicacion, informe));
   }
 }
 

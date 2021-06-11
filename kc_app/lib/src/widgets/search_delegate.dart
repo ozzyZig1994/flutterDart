@@ -47,34 +47,37 @@ class DataSearch extends SearchDelegate {
     return FutureBuilder(
         future: cultivoProvider.buscaCultivo(query),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData) {
-              final cultivo = snapshot.data;
-              return ListView.builder(
-                  itemCount:
-                      (cultivo['info'] != null) ? cultivo['info'].length : 0,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      leading: Icon(Icons.info_outline),
-                      title: Text(cultivo['info'][index]['cultivo']),
-                      onTap: () {
-                        close(context, null);
-                        Navigator.pushNamed(context, 'cultivo',
-                            arguments: CultivoArguments(
-                                cultivo['info'][index]['cultivo'],
-                                cultivo['info'][index]['etapa'],
-                                cultivo['info'][index]['aplicacion'],
-                                cultivo['info'][index]['informe']));
-                      },
-                    );
-                  });
-            } else {
-              final cultivo = snapshot.data;
-              return Center(child: Text(cultivo['message']));
-            }
+          if ((snapshot.connectionState == ConnectionState.done) &
+              snapshot.hasData) {
+            if (snapshot.data['info'] != null)
+              return _listadoSugerencias(context, snapshot);
+            else
+              return Center(child: Text('hola'));
           } else {
             return Center(child: CircularProgressIndicator());
           }
+        });
+  }
+
+  Widget _listadoSugerencias(BuildContext context, AsyncSnapshot snapshot) {
+    final cultivo = snapshot.data;
+
+    return ListView.builder(
+        itemCount: cultivo['info'].length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            leading: Icon(Icons.info_outline),
+            title: Text(cultivo['info'][index]['cultivo']),
+            onTap: () {
+              close(context, null);
+              Navigator.pushNamed(context, 'cultivo',
+                  arguments: CultivoArguments(
+                      cultivo['info'][index]['cultivo'],
+                      cultivo['info'][index]['etapa'],
+                      cultivo['info'][index]['aplicacion'],
+                      cultivo['info'][index]['informe']));
+            },
+          );
         });
   }
 }

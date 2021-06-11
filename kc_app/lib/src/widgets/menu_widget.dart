@@ -13,31 +13,8 @@ class MenuWidget extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  CircleAvatar(
-                    child: Text(prefs.usuario),
-                    radius: 35.0,
-                  ),
-                  SizedBox(height: 15.0),
-                  Text(prefs.nombreUsuario,
-                      style: TextStyle(color: Colors.white)),
-                  Text(prefs.emailUsuario,
-                      style: TextStyle(color: Colors.white))
-                ],
-              ),
-            ),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('menu-img.jpg'), fit: BoxFit.cover)),
-          ),
-          ListTile(
-            leading: Icon(Icons.logout, color: Colors.deepPurple),
-            title: Text('Cerrar sesión'),
-            onTap: () => _onTap(context),
-          )
+          _drawerHeader(),
+          _logoutOption(context)
         ],
       ),
     );
@@ -46,5 +23,34 @@ class MenuWidget extends StatelessWidget {
   _onTap(BuildContext context) {
     usuarioProvider.logout(prefs.usuario, prefs.ip);
     return Navigator.pushReplacementNamed(context, LoginPage.routeName);
+  }
+
+  Widget _drawerHeader() {
+    return DrawerHeader(
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            CircleAvatar(
+              child: Text(prefs.usuario),
+              radius: 35.0,
+            ),
+            SizedBox(height: 15.0),
+            Text(prefs.nombreUsuario, style: TextStyle(color: Colors.white)),
+            Text(prefs.emailUsuario, style: TextStyle(color: Colors.white))
+          ],
+        ),
+      ),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('menu-img.jpg'), fit: BoxFit.cover)),
+    );
+  }
+
+  Widget _logoutOption(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.logout, color: Colors.deepPurple),
+      title: Text('Cerrar sesión'),
+      onTap: () => _onTap(context),
+    );
   }
 }
