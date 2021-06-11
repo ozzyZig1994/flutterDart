@@ -4,12 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:kc_app/src/models/cultivos_models.dart';
 import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
 
-final _urlCultivos =
-    'https://www.bactiva.com/knowledgecenter/kc/public/cultivos';
-
 class CultivosService with ChangeNotifier {
   List<Cultivo> cultivos = [];
   final _prefs = new PreferenciasUsuario();
+
+  final String _url = 'www.bactiva.com';
 
   CultivosService() {
     this.getListaCultivos();
@@ -17,7 +16,7 @@ class CultivosService with ChangeNotifier {
 
   getListaCultivos() async {
     final respListCultivos = await http.get(
-        Uri.parse('$_urlCultivos/listaCultivos'),
+        Uri.https(_url, '/knowledgecenter/kc/public/cultivos/listaCultivos'),
         headers: {'token': _prefs.token});
     final cultivosResponse = cultivosFromJson(respListCultivos.body);
 

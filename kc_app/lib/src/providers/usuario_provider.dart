@@ -6,9 +6,12 @@ import 'package:kc_app/src/preferencias_usuario/preferencias_usuario.dart';
 class UsuarioProvider {
   final _prefs = new PreferenciasUsuario();
 
+  final String _urlIp = 'api.ipify.org';
+  final String _urlBactiva = 'www.bactiva.com';
+
   Future<Map<String, dynamic>> login(String email, String password) async {
     final ipResponse =
-        await http.get(Uri.parse('https://api.ipify.org?format=json'));
+        await http.get(Uri.https(_urlIp, '', {"format": "json"}));
     Map<String, dynamic> decodeIpResp = json.decode(ipResponse.body);
 
     final authData = {
@@ -18,8 +21,7 @@ class UsuarioProvider {
     };
 
     final usuarioResponse = await http.post(
-        Uri.parse(
-            'https://www.bactiva.com/knowledgecenter/kc/public/usuarios/login'),
+        Uri.https(_urlBactiva, '/knowledgecenter/kc/public/usuarios/login'),
         body: authData);
     Map<String, dynamic> decodeUsuarioResp = json.decode(usuarioResponse.body);
 
@@ -40,12 +42,11 @@ class UsuarioProvider {
     final sessionData = {'usuario': email, 'ip': ip};
 
     final logoutResponse = await http.post(
-        Uri.parse(
-            'https://www.bactiva.com/knowledgecenter/kc/public/usuarios/logout'),
+        Uri.https(_urlBactiva, '/knowledgecenter/kc/public/usuarios/logout'),
         body: sessionData);
     Map<String, dynamic> decodeLogoutResponse =
         json.decode(logoutResponse.body);
-    
+
     return decodeLogoutResponse;
   }
 }
