@@ -52,7 +52,7 @@ class DataSearch extends SearchDelegate {
             if (snapshot.data['info'] != null)
               return _listadoSugerencias(context, snapshot);
             else
-              return Center(child: Text('hola'));
+              return Center(child: Text(snapshot.data['message']));
           } else {
             return Center(child: CircularProgressIndicator());
           }
